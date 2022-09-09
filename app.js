@@ -1,7 +1,7 @@
 const express = require('express');
-const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
+const ejsMate = require('ejs-mate');
 const methodOverride = require('method-override');
 const Camapground = require('./modles/campground');
 
@@ -11,7 +11,9 @@ async function main() {
     await mongoose.connect('mongodb://0.0.0.0:27017/yelp-camp');
     console.log("Mongo Connection Open!");
 }
+const app = express();
 
+app.engine('ejs',ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
